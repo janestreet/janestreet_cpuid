@@ -1,3 +1,4 @@
 (library (name cpuid) (js_of_ocaml (javascript_files cpuid.js))
  (libraries core core_kernel.flags) (c_flags (:standard))
- (c_names cpuid_stubs) (public_name cpuid) (preprocess (pps ppx_jane)))
+ (c_names cpuid_stubs) (public_name janestreet_cpuid)
+ (preprocess (pps ppx_jane)))
