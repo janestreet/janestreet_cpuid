@@ -1,4 +1,5 @@
 open Base
+open Core
 
 module type S = Cpuid_intf.S
 
@@ -114,3 +115,25 @@ let supports_fma = function
     let open Intel_cpuid.Version_and_feature_information in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.fma
 ;;
+
+module Registers = struct
+  type t =
+    { eax : int
+    ; ebx : int
+    ; ecx : int
+    ; edx : int
+    }
+
+  let print t =
+    printf "EAX: %08x\n" t.eax;
+    printf "EBX: %08x\n" t.ebx;
+    printf "ECX: %08x\n" t.ecx;
+    printf "EDX: %08x\n" t.edx
+  ;;
+end
+
+external arbitrary_leaf_and_subleaf
+  :  leaf:int
+  -> subleaf:int
+  -> (Registers.t[@local])
+  = "cpuid_arbitrary_leaf_and_subleaf"

@@ -18,6 +18,27 @@
 #define STRUCTURED_EXTENDED_FEATURE_FLAGS_LEAF 0x07
 #define ARCHITECTURAL_PERFORMANCE_MONITORING_LEAF 0x0a
 
+CAMLprim value cpuid_arbitrary_leaf_and_subleaf(value v_eax, value v_ecx) {
+  CAMLparam2(v_eax, v_ecx);
+  CAMLlocal1(result);
+
+  uint32_t eax, ebx, ecx, edx;
+  uint32_t in_eax, in_ecx;
+
+  in_eax = Int_val(v_eax);
+  in_ecx = Int_val(v_ecx);
+
+  __cpuid_count(in_eax, in_ecx, eax, ebx, ecx, edx);
+
+  result = caml_alloc_local(4, 0);
+  Store_field(result, 0, Val_int(eax));
+  Store_field(result, 1, Val_int(ebx));
+  Store_field(result, 2, Val_int(ecx));
+  Store_field(result, 3, Val_int(edx));
+
+  CAMLreturn(result);
+}
+
 CAMLprim value cpuid_maximum_value_and_brand(value v_record) {
   CAMLparam1(v_record);
   CAMLlocal1(v_brand_string);
