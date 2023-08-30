@@ -60,29 +60,29 @@ module Version_and_feature_information = struct
     let rdrand = bit63 30
 
     include Flags.Make (struct
-        let allow_intersecting = false
-        let should_print_error = true
-        let remove_zero_flags = false
+      let allow_intersecting = false
+      let should_print_error = true
+      let remove_zero_flags = false
 
-        let known =
-          [ sse3, "sse3"
-          ; pclmulqdq, "pclmulqdq"
-          ; monitor, "monitor"
-          ; ssse3, "ssse3"
-          ; fma, "fma"
-          ; cmpxchg16b, "cmpxchg16b"
-          ; sse4_1, "sse4_1"
-          ; sse4_2, "sse4_2"
-          ; popcnt, "popcnt"
-          ; aes, "aes"
-          ; xsave, "xsave"
-          ; osxsave, "osxsave"
-          ; avx, "avx"
-          ; f16c, "f16c"
-          ; rdrand, "rdrand"
-          ]
-        ;;
-      end)
+      let known =
+        [ sse3, "sse3"
+        ; pclmulqdq, "pclmulqdq"
+        ; monitor, "monitor"
+        ; ssse3, "ssse3"
+        ; fma, "fma"
+        ; cmpxchg16b, "cmpxchg16b"
+        ; sse4_1, "sse4_1"
+        ; sse4_2, "sse4_2"
+        ; popcnt, "popcnt"
+        ; aes, "aes"
+        ; xsave, "xsave"
+        ; osxsave, "osxsave"
+        ; avx, "avx"
+        ; f16c, "f16c"
+        ; rdrand, "rdrand"
+        ]
+      ;;
+    end)
   end
 
   module Edx_flags = struct
@@ -111,37 +111,37 @@ module Version_and_feature_information = struct
     let htt = bit63 28
 
     include Flags.Make (struct
-        let allow_intersecting = false
-        let should_print_error = true
-        let remove_zero_flags = false
+      let allow_intersecting = false
+      let should_print_error = true
+      let remove_zero_flags = false
 
-        let known =
-          [ fpu, "fpu"
-          ; vme, "vme"
-          ; de, "de"
-          ; pse, "pse"
-          ; tsc, "tsc"
-          ; msr, "msr"
-          ; pae, "pae"
-          ; mce, "mce"
-          ; cmpxchg8b, "cmpxchg8b"
-          ; apic, "apic"
-          ; sysentersysexit, "sysentersysexit"
-          ; mtrr, "mtrr"
-          ; pge, "pge"
-          ; mca, "mca"
-          ; cmov, "cmov"
-          ; pat, "pat"
-          ; pse36, "pse36"
-          ; clfsh, "clfsh"
-          ; mmx, "mmx"
-          ; fxsr, "fxsr"
-          ; sse, "sse"
-          ; sse2, "sse2"
-          ; htt, "htt"
-          ]
-        ;;
-      end)
+      let known =
+        [ fpu, "fpu"
+        ; vme, "vme"
+        ; de, "de"
+        ; pse, "pse"
+        ; tsc, "tsc"
+        ; msr, "msr"
+        ; pae, "pae"
+        ; mce, "mce"
+        ; cmpxchg8b, "cmpxchg8b"
+        ; apic, "apic"
+        ; sysentersysexit, "sysentersysexit"
+        ; mtrr, "mtrr"
+        ; pge, "pge"
+        ; mca, "mca"
+        ; cmov, "cmov"
+        ; pat, "pat"
+        ; pse36, "pse36"
+        ; clfsh, "clfsh"
+        ; mmx, "mmx"
+        ; fxsr, "fxsr"
+        ; sse, "sse"
+        ; sse2, "sse2"
+        ; htt, "htt"
+        ]
+      ;;
+    end)
   end
 
   type t =
@@ -230,26 +230,26 @@ module Extended_feature_flags_subleaf_0 = struct
     let sha = bit63 29
 
     include Flags.Make (struct
-        let allow_intersecting = false
-        let should_print_error = true
-        let remove_zero_flags = false
+      let allow_intersecting = false
+      let should_print_error = true
+      let remove_zero_flags = false
 
-        let known =
-          [ fsgsbase, "fsgsbase"
-          ; bmi1, "bmi1"
-          ; avx2, "avx2"
-          ; smep, "smep"
-          ; bmi2, "bmi2"
-          ; rdseed, "rdseed"
-          ; adx, "adx"
-          ; smap, "smap"
-          ; rdpid, "rdpid"
-          ; clflushopt, "clflushopt"
-          ; clwb, "clwb"
-          ; sha, "sha"
-          ]
-        ;;
-      end)
+      let known =
+        [ fsgsbase, "fsgsbase"
+        ; bmi1, "bmi1"
+        ; avx2, "avx2"
+        ; smep, "smep"
+        ; bmi2, "bmi2"
+        ; rdseed, "rdseed"
+        ; adx, "adx"
+        ; smap, "smap"
+        ; rdpid, "rdpid"
+        ; clflushopt, "clflushopt"
+        ; clwb, "clwb"
+        ; sha, "sha"
+        ]
+      ;;
+    end)
   end
 
   module Ecx_flags = struct
@@ -261,20 +261,20 @@ module Extended_feature_flags_subleaf_0 = struct
     let vpcmulqdq = bit63 10
 
     include Flags.Make (struct
-        let allow_intersecting = false
-        let should_print_error = true
-        let remove_zero_flags = false
+      let allow_intersecting = false
+      let should_print_error = true
+      let remove_zero_flags = false
 
-        let known =
-          [ umip, "umip"
-          ; pku, "pku"
-          ; ospke, "ospke"
-          ; cet_ss, "cet_ss"
-          ; vaes, "vaes"
-          ; vpcmulqdq, "vpcmulqdq"
-          ]
-        ;;
-      end)
+      let known =
+        [ umip, "umip"
+        ; pku, "pku"
+        ; ospke, "ospke"
+        ; cet_ss, "cet_ss"
+        ; vaes, "vaes"
+        ; vpcmulqdq, "vpcmulqdq"
+        ]
+      ;;
+    end)
   end
 
   type t =

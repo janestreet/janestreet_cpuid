@@ -40,7 +40,7 @@ module Version_and_feature_information : sig
       { mutable brand_index : int
       ; mutable clflush_line_size : int
       ; mutable max_addressable_logical_processors : int
-      (* this value is conditionally valid *)
+          (* this value is conditionally valid *)
       ; mutable initial_apic_id : int
       }
     [@@deriving sexp_of]

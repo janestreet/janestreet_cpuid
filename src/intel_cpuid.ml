@@ -84,44 +84,44 @@ module Version_and_feature_information = struct
     let rdrand = bit63 30
 
     include Flags.Make (struct
-        let allow_intersecting = false
-        let should_print_error = true
-        let remove_zero_flags = false
+      let allow_intersecting = false
+      let should_print_error = true
+      let remove_zero_flags = false
 
-        let known =
-          [ sse3, "sse3"
-          ; pclmulqdq, "pclmulqdq"
-          ; dtes64, "dtes64"
-          ; monitor, "monitor"
-          ; dscpl, "dscpl"
-          ; vmx, "vmx"
-          ; smx, "smx"
-          ; eist, "eist"
-          ; tm2, "tm2"
-          ; ssse3, "ssse3"
-          ; cnxtid, "cnxtid"
-          ; sdbg, "sdbg"
-          ; fma, "fma"
-          ; cmpxchg16b, "cmpxchg16b"
-          ; xtpr_update_control, "xtpr_update_control"
-          ; pdcm, "pdcm"
-          ; pcid, "pcid"
-          ; dca, "dca"
-          ; sse4_1, "sse4_1"
-          ; sse4_2, "sse4_2"
-          ; x2apic, "x2apic"
-          ; movbe, "movbe"
-          ; popcnt, "popcnt"
-          ; tsc_deadline, "tsc_deadline"
-          ; aesni, "aesni"
-          ; xsave, "xsave"
-          ; osxsave, "osxsave"
-          ; avx, "avx"
-          ; f16c, "f16c"
-          ; rdrand, "rdrand"
-          ]
-        ;;
-      end)
+      let known =
+        [ sse3, "sse3"
+        ; pclmulqdq, "pclmulqdq"
+        ; dtes64, "dtes64"
+        ; monitor, "monitor"
+        ; dscpl, "dscpl"
+        ; vmx, "vmx"
+        ; smx, "smx"
+        ; eist, "eist"
+        ; tm2, "tm2"
+        ; ssse3, "ssse3"
+        ; cnxtid, "cnxtid"
+        ; sdbg, "sdbg"
+        ; fma, "fma"
+        ; cmpxchg16b, "cmpxchg16b"
+        ; xtpr_update_control, "xtpr_update_control"
+        ; pdcm, "pdcm"
+        ; pcid, "pcid"
+        ; dca, "dca"
+        ; sse4_1, "sse4_1"
+        ; sse4_2, "sse4_2"
+        ; x2apic, "x2apic"
+        ; movbe, "movbe"
+        ; popcnt, "popcnt"
+        ; tsc_deadline, "tsc_deadline"
+        ; aesni, "aesni"
+        ; xsave, "xsave"
+        ; osxsave, "osxsave"
+        ; avx, "avx"
+        ; f16c, "f16c"
+        ; rdrand, "rdrand"
+        ]
+      ;;
+    end)
   end
 
   module Edx_flags = struct
@@ -162,43 +162,43 @@ module Version_and_feature_information = struct
     let pbe = bit63 31
 
     include Flags.Make (struct
-        let allow_intersecting = false
-        let should_print_error = true
-        let remove_zero_flags = false
+      let allow_intersecting = false
+      let should_print_error = true
+      let remove_zero_flags = false
 
-        let known =
-          [ fpu, "fpu"
-          ; vme, "vme"
-          ; de, "de"
-          ; pse, "pse"
-          ; tsc, "tsc"
-          ; msr, "msr"
-          ; pae, "pae"
-          ; mce, "mce"
-          ; cx8, "cx8"
-          ; apic, "apic"
-          ; sep, "sep"
-          ; mtrr, "mtrr"
-          ; pge, "pge"
-          ; mca, "mca"
-          ; cmov, "cmov"
-          ; pat, "pat"
-          ; pse36, "pse36"
-          ; psn, "psn"
-          ; clfsh, "clfsh"
-          ; ds, "ds"
-          ; acpi, "acpi"
-          ; mmx, "mmx"
-          ; fxsr, "fxsr"
-          ; sse, "sse"
-          ; sse2, "sse2"
-          ; ss, "ss"
-          ; htt, "htt"
-          ; tm, "tm"
-          ; pbe, "pbe"
-          ]
-        ;;
-      end)
+      let known =
+        [ fpu, "fpu"
+        ; vme, "vme"
+        ; de, "de"
+        ; pse, "pse"
+        ; tsc, "tsc"
+        ; msr, "msr"
+        ; pae, "pae"
+        ; mce, "mce"
+        ; cx8, "cx8"
+        ; apic, "apic"
+        ; sep, "sep"
+        ; mtrr, "mtrr"
+        ; pge, "pge"
+        ; mca, "mca"
+        ; cmov, "cmov"
+        ; pat, "pat"
+        ; pse36, "pse36"
+        ; psn, "psn"
+        ; clfsh, "clfsh"
+        ; ds, "ds"
+        ; acpi, "acpi"
+        ; mmx, "mmx"
+        ; fxsr, "fxsr"
+        ; sse, "sse"
+        ; sse2, "sse2"
+        ; ss, "ss"
+        ; htt, "htt"
+        ; tm, "tm"
+        ; pbe, "pbe"
+        ]
+      ;;
+    end)
   end
 
   type t =
@@ -315,45 +315,45 @@ module Extended_feature_flags_subleaf_0 = struct
     let avx512vl = bit63 31
 
     include Flags.Make (struct
-        let allow_intersecting = false
-        let should_print_error = true
-        let remove_zero_flags = false
+      let allow_intersecting = false
+      let should_print_error = true
+      let remove_zero_flags = false
 
-        let known =
-          [ fsgsbase, "fsgsbase"
-          ; ia32_tsc_adjust, "ia32_tsc_adjust"
-          ; sgx, "sgx"
-          ; bmi1, "bmi1"
-          ; hle, "hle"
-          ; avx2, "avx2"
-          ; fdp_excptn_only, "fdp_excptn_only"
-          ; smep, "smep"
-          ; bmi2, "bmi2"
-          ; enhanced_rep_movsto, "enhanced_rep_movsto"
-          ; invpcid, "invpcid"
-          ; rtm, "rtm"
-          ; rdt_m, "rdt_m"
-          ; deprecate_fpu_csds, "deprecate_fpu_csds"
-          ; mpx, "mpx"
-          ; rdt_a, "rdt_a"
-          ; avx512f, "avx512f"
-          ; avx512dq, "avx512dq"
-          ; rdseed, "rdseed"
-          ; adx, "adx"
-          ; smap, "smap"
-          ; avx512ifma, "avx512ifma"
-          ; clflushopt, "clflushopt"
-          ; clwb, "clwb"
-          ; intel_processor_trace, "intel_processor_trace"
-          ; avx512pf, "avx512pf"
-          ; avx512er, "avx512er"
-          ; avx512cd, "avx512cd"
-          ; sha, "sha"
-          ; avx512bw, "avx512bw"
-          ; avx512vl, "avx512vl"
-          ]
-        ;;
-      end)
+      let known =
+        [ fsgsbase, "fsgsbase"
+        ; ia32_tsc_adjust, "ia32_tsc_adjust"
+        ; sgx, "sgx"
+        ; bmi1, "bmi1"
+        ; hle, "hle"
+        ; avx2, "avx2"
+        ; fdp_excptn_only, "fdp_excptn_only"
+        ; smep, "smep"
+        ; bmi2, "bmi2"
+        ; enhanced_rep_movsto, "enhanced_rep_movsto"
+        ; invpcid, "invpcid"
+        ; rtm, "rtm"
+        ; rdt_m, "rdt_m"
+        ; deprecate_fpu_csds, "deprecate_fpu_csds"
+        ; mpx, "mpx"
+        ; rdt_a, "rdt_a"
+        ; avx512f, "avx512f"
+        ; avx512dq, "avx512dq"
+        ; rdseed, "rdseed"
+        ; adx, "adx"
+        ; smap, "smap"
+        ; avx512ifma, "avx512ifma"
+        ; clflushopt, "clflushopt"
+        ; clwb, "clwb"
+        ; intel_processor_trace, "intel_processor_trace"
+        ; avx512pf, "avx512pf"
+        ; avx512er, "avx512er"
+        ; avx512cd, "avx512cd"
+        ; sha, "sha"
+        ; avx512bw, "avx512bw"
+        ; avx512vl, "avx512vl"
+        ]
+      ;;
+    end)
   end
 
   module Ecx_flags = struct
@@ -393,36 +393,36 @@ module Extended_feature_flags_subleaf_0 = struct
     let pks = bit63 31
 
     include Flags.Make (struct
-        let allow_intersecting = false
-        let should_print_error = true
-        let remove_zero_flags = false
+      let allow_intersecting = false
+      let should_print_error = true
+      let remove_zero_flags = false
 
-        let known =
-          [ prefetchwt1, "preefetchwt1"
-          ; avx512vbmi, "avx512vbmi"
-          ; umip, "umip"
-          ; pku, "pku"
-          ; ospke, "ospke"
-          ; waitpkg, "waitpkg"
-          ; avx512vmbi2, "avx512vmbi2"
-          ; cet_ss, "cet_ss"
-          ; gfni, "gfni"
-          ; vaes, "vaes"
-          ; vpclmulqdq, "vpclmulqdq"
-          ; avx512vnni, "avx512vnni"
-          ; avx512bitalg, "avx512bitalg"
-          ; avx512vpopcntdq, "avx512vpopcntdq"
-          ; la57, "la57"
-          ; rdpid, "rdpid"
-          ; keylocker, "keylocker"
-          ; cldemote, "cldemote"
-          ; movdiri, "movdiri"
-          ; movdir64b, "movdir64b"
-          ; sgx_lc, "sgx_lc"
-          ; pks, "pks"
-          ]
-        ;;
-      end)
+      let known =
+        [ prefetchwt1, "preefetchwt1"
+        ; avx512vbmi, "avx512vbmi"
+        ; umip, "umip"
+        ; pku, "pku"
+        ; ospke, "ospke"
+        ; waitpkg, "waitpkg"
+        ; avx512vmbi2, "avx512vmbi2"
+        ; cet_ss, "cet_ss"
+        ; gfni, "gfni"
+        ; vaes, "vaes"
+        ; vpclmulqdq, "vpclmulqdq"
+        ; avx512vnni, "avx512vnni"
+        ; avx512bitalg, "avx512bitalg"
+        ; avx512vpopcntdq, "avx512vpopcntdq"
+        ; la57, "la57"
+        ; rdpid, "rdpid"
+        ; keylocker, "keylocker"
+        ; cldemote, "cldemote"
+        ; movdiri, "movdiri"
+        ; movdir64b, "movdir64b"
+        ; sgx_lc, "sgx_lc"
+        ; pks, "pks"
+        ]
+      ;;
+    end)
 
     let mawau t =
       let mask = Int63.of_int (0x1F lsl 18) in
@@ -458,27 +458,27 @@ module Extended_feature_flags_subleaf_0 = struct
     let ssbd = bit63 31
 
     include Flags.Make (struct
-        let allow_intersecting = false
-        let should_print_error = true
-        let remove_zero_flags = false
+      let allow_intersecting = false
+      let should_print_error = true
+      let remove_zero_flags = false
 
-        let known =
-          [ avx5124vnniw, "avx5124vnniw"
-          ; avx5124fmaps, "avx5124fmaps"
-          ; fast_short_rep_move, "fast_short_rep_move"
-          ; avx512_vp2intersect, "avx512_vp2intersect"
-          ; md_clear, "md_clear"
-          ; hybrid, "hybrid"
-          ; cet_ibt, "cet_ibt"
-          ; ibrs_ibpb, "ibrs_ibpb"
-          ; stibp, "stibp"
-          ; l1d_flush, "l1d_flush"
-          ; ia32_arch_capabilities, "ia32_arch_capabilities"
-          ; ia32_core_capabilities, "ia32_core_capabilities"
-          ; ssbd, "ssbd"
-          ]
-        ;;
-      end)
+      let known =
+        [ avx5124vnniw, "avx5124vnniw"
+        ; avx5124fmaps, "avx5124fmaps"
+        ; fast_short_rep_move, "fast_short_rep_move"
+        ; avx512_vp2intersect, "avx512_vp2intersect"
+        ; md_clear, "md_clear"
+        ; hybrid, "hybrid"
+        ; cet_ibt, "cet_ibt"
+        ; ibrs_ibpb, "ibrs_ibpb"
+        ; stibp, "stibp"
+        ; l1d_flush, "l1d_flush"
+        ; ia32_arch_capabilities, "ia32_arch_capabilities"
+        ; ia32_core_capabilities, "ia32_core_capabilities"
+        ; ssbd, "ssbd"
+        ]
+      ;;
+    end)
   end
 
   type t =
