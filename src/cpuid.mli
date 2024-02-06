@@ -85,7 +85,7 @@ module Intel = Intel_cpuid
 module Registers : sig
   type t
 
-  val print : (t[@local]) -> unit
+  val print : t -> unit
 end
 
-val arbitrary_leaf_and_subleaf : leaf:int -> subleaf:int -> (Registers.t[@local])
+val arbitrary_leaf_and_subleaf : leaf:int -> subleaf:int -> Registers.t
