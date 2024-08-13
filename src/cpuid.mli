@@ -73,6 +73,20 @@ val supports_pclmulqdq : t -> bool
 val supports_fma : t -> bool
 
 (**
+   Does the processor support the WAITPKG instruction set extensions.
+
+   Support starts with the Tremont microarchitecture. For servers, Sapphire Rapids.
+ **)
+val supports_waitpkg : t -> bool
+
+(**
+   Does the processor support the RTM instruction set extensions.
+
+   Add [tsx=on] or [tsx=auto] to kernel command-line to enable RTM.
+ **)
+val supports_rtm : t -> bool
+
+(**
    Module gateway into AMD specific flags and functionality.
  **)
 module Amd = Amd_cpuid

@@ -116,6 +116,20 @@ let supports_fma = function
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.fma
 ;;
 
+let supports_waitpkg = function
+  | Amd _ -> false
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.waitpkg
+;;
+
+let supports_rtm = function
+  | Amd _ -> false
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.rtm
+;;
+
 module Registers = struct
   type t =
     { eax : int

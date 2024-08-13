@@ -54,8 +54,8 @@ CAMLprim value cpuid_maximum_value_and_brand(value v_record) {
   } brand;
   uint32_t eax;
   memset(&brand, 0, sizeof(brand));
-  __cpuid_count(MAXIMUM_VALUE_AND_BRAND_LEAF, 0, eax, brand.regs.ebx,
-                brand.regs.ecx, brand.regs.edx);
+  __cpuid_count(MAXIMUM_VALUE_AND_BRAND_LEAF, 0, eax, brand.regs.ebx, brand.regs.ecx,
+                brand.regs.edx);
   Store_field(v_record, 0, Val_int(eax));
   v_brand_string = caml_copy_string(brand.text);
   Store_field(v_record, 1, v_brand_string);
@@ -63,8 +63,7 @@ CAMLprim value cpuid_maximum_value_and_brand(value v_record) {
   CAMLreturn(Val_unit);
 }
 
-CAMLprim value amd_cpuid_version_and_feature_information(value v_eax,
-                                                         value v_ebx,
+CAMLprim value amd_cpuid_version_and_feature_information(value v_eax, value v_ebx,
                                                          value v_record) {
   CAMLparam3(v_eax, v_ebx, v_record);
   union {
@@ -92,8 +91,7 @@ CAMLprim value amd_cpuid_version_and_feature_information(value v_eax,
 
   uint32_t ecx, edx;
 
-  __cpuid_count(VERSION_AND_FEATURE_INFORMATION_LEAF, 0, eax.reg, ebx.reg, ecx,
-                edx);
+  __cpuid_count(VERSION_AND_FEATURE_INFORMATION_LEAF, 0, eax.reg, ebx.reg, ecx, edx);
 
   // Store version information for eax
   Store_field(v_eax, 0, Val_int(eax.info.step));
@@ -114,8 +112,7 @@ CAMLprim value amd_cpuid_version_and_feature_information(value v_eax,
   CAMLreturn(Val_unit);
 }
 
-CAMLprim value intel_cpuid_version_and_feature_information(value v_eax,
-                                                           value v_ebx,
+CAMLprim value intel_cpuid_version_and_feature_information(value v_eax, value v_ebx,
                                                            value v_record) {
   CAMLparam3(v_eax, v_ebx, v_record);
   union {
@@ -144,8 +141,7 @@ CAMLprim value intel_cpuid_version_and_feature_information(value v_eax,
 
   uint32_t ecx, edx;
 
-  __cpuid_count(VERSION_AND_FEATURE_INFORMATION_LEAF, 0, eax.reg, ebx.reg, ecx,
-                edx);
+  __cpuid_count(VERSION_AND_FEATURE_INFORMATION_LEAF, 0, eax.reg, ebx.reg, ecx, edx);
 
   // Store version information for eax
   Store_field(v_eax, 0, Val_int(eax.info.step));
@@ -172,8 +168,7 @@ CAMLprim value cpuid_extended_feature_flags_subleaf0(value v_record) {
 
   uint32_t eax, ebx, ecx, edx;
 
-  __cpuid_count(STRUCTURED_EXTENDED_FEATURE_FLAGS_LEAF, 0x0, eax, ebx, ecx,
-                edx);
+  __cpuid_count(STRUCTURED_EXTENDED_FEATURE_FLAGS_LEAF, 0x0, eax, ebx, ecx, edx);
 
   Store_field(v_record, 1, Val_int(ebx));
   Store_field(v_record, 2, Val_int(ecx));
