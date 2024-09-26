@@ -30,7 +30,7 @@ CAMLprim value cpuid_arbitrary_leaf_and_subleaf(value v_eax, value v_ecx) {
 
   __cpuid_count(in_eax, in_ecx, eax, ebx, ecx, edx);
 
-  result = caml_alloc_local(4, 0);
+  result = caml_alloc(4, 0);
   Store_field(result, 0, Val_int(eax));
   Store_field(result, 1, Val_int(ebx));
   Store_field(result, 2, Val_int(ecx));
