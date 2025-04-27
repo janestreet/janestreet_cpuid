@@ -1,23 +1,17 @@
-(**
-   All of the information in this file comes from (currently) page 792 of the Intel
-   Software Developer's Library (combined 4 volumes), a.k.a the section in Volume 2
-   detailing the CPUID instruction.
-*)
+(** All of the information in this file comes from (currently) page 792 of the Intel
+    Software Developer's Library (combined 4 volumes), a.k.a the section in Volume 2
+    detailing the CPUID instruction. *)
 
 include Cpuid_intf.S
 
-(**
-   On Intel CPUs the leaf retrieved when EAX is set to 0x1 contains processor model
-   information as well as some basic features about the processor. Typically if
-   you're checking a flag in this section it's probably available on every machine
-   that we run on (our machines tend towards modernity) but good on you for checking!
-*)
+(** On Intel CPUs the leaf retrieved when EAX is set to 0x1 contains processor model
+    information as well as some basic features about the processor. Typically if you're
+    checking a flag in this section it's probably available on every machine that we run
+    on (our machines tend towards modernity) but good on you for checking! *)
 module Version_and_feature_information : sig
-  (**
-     This information can be used to build a unique identifier for a given processor,
-     which can be useful for any pre-computed data which you need to index into based
-     on what machine it's running on.
-  *)
+  (** This information can be used to build a unique identifier for a given processor,
+      which can be useful for any pre-computed data which you need to index into based on
+      what machine it's running on. *)
   module Eax : sig
     type t =
       { mutable step : int
@@ -30,11 +24,9 @@ module Version_and_feature_information : sig
     [@@deriving sexp_of]
   end
 
-  (**
-     This is the only field in the CPUID which changes when called multiple times. The
-     [initial_apic_id] field changes based on which core the process is currently running
-     on.
-   **)
+  (** This is the only field in the CPUID which changes when called multiple times. The
+      [initial_apic_id] field changes based on which core the process is currently running
+      on. **)
   module Ebx : sig
     type t =
       { mutable brand_index : int
@@ -131,9 +123,8 @@ module Version_and_feature_information : sig
   end
 end
 
-(** For identifying which table of perf-events applies for this processor. We
-    use the form specified in the https://download.01.org/perfmon/mapfile.csv,
-    i.e.:
+(** For identifying which table of perf-events applies for this processor. We use the form
+    specified in the https://download.01.org/perfmon/mapfile.csv, i.e.:
     Family-Model-optionalStepping,Version,Filename,EventType
     GenuineIntel-6-2E,V2,/NHM-EX/NehalemEX_core_V2.json,core
     GenuineIntel-6-1E,V2,/NHM-EP/NehalemEP_core_V2.json,core
@@ -149,16 +140,13 @@ end
     GenuineIntel-6-55-[56789ABCDEF], instead of GenuineIntel-6-55. *)
 val canonical_identifier : t -> string
 
-(**
-   The leaf at 0x7 is special because in addition to putting 0x7 it also lets you
-   put a value into ECX to get a particular feature subleaf. In this case we want
-   ECX=0x0, and any processor which supports EAX=0x7 (which we do check) supports
-   ECX=0x0.
+(** The leaf at 0x7 is special because in addition to putting 0x7 it also lets you put a
+    value into ECX to get a particular feature subleaf. In this case we want ECX=0x0, and
+    any processor which supports EAX=0x7 (which we do check) supports ECX=0x0.
 
-   This provides flags into more modern features on Intel CPUs, including some which
-   most of our machines definitely do not have. If you use any of these features,
-   check to make sure they're supported.
-*)
+    This provides flags into more modern features on Intel CPUs, including some which most
+    of our machines definitely do not have. If you use any of these features, check to
+    make sure they're supported. *)
 module Extended_feature_flags_subleaf_0 : sig
   module Ebx_flags : sig
     include Flags.S
