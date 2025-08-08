@@ -117,36 +117,58 @@ module Extended_feature_flags_subleaf_0 : sig
     val avx2 : t
     val smep : t
     val bmi2 : t
+    val avx512f : t
+    val avx512dq : t
     val rdseed : t
     val adx : t
     val smap : t
+    val avx512ifma : t
     val rdpid : t
     val clflushopt : t
     val clwb : t
+    val avx512pf : t
+    val avx512er : t
+    val avx512cd : t
     val sha : t
+    val avx512bw : t
+    val avx512vl : t
   end
 
   module Ecx_flags : sig
     include Flags.S
 
+    val avx512vbmi : t
     val umip : t
     val pku : t
     val ospke : t
+    val avx512vmbi2 : t
     val cet_ss : t
     val vaes : t
     val vpcmulqdq : t
+    val avx512vnni : t
+    val avx512bitalg : t
+    val avx512vpopcntdq : t
+  end
+
+  module Edx_flags : sig
+    include Flags.S
+
+    val avx5124vnniw : t
+    val avx5124fmaps : t
+    val avx512_vp2intersect : t
   end
 
   type t =
     { max_subleaf : int
     ; ebx : Ebx_flags.t
     ; ecx : Ecx_flags.t
+    ; edx : Edx_flags.t
     }
   [@@deriving sexp_of]
 
   val retrieve : unit -> t
 
   module For_testing : sig
-    val build_from_ints : eax:int -> ebx:int -> ecx:int -> t
+    val build_from_ints : eax:int -> ebx:int -> ecx:int -> edx:int -> t
   end
 end

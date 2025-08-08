@@ -2,8 +2,7 @@ open Core
 
 type t = Cpuid_intf.Basic_info.t
 
-let bit n = 1 lsl n
-let bit63 n = Int63.of_int (bit n)
+let bit63 n = Int63.(one lsl n)
 let kind = Type_equal.Id.create ~name:"AMD CPUID" [%sexp_of: _]
 let create = Fn.id
 let maximum_leaf (t : t) = t.maximum_value
@@ -221,13 +220,21 @@ module Extended_feature_flags_subleaf_0 = struct
     let avx2 = bit63 5
     let smep = bit63 7
     let bmi2 = bit63 8
+    let avx512f = bit63 16
+    let avx512dq = bit63 17
     let rdseed = bit63 18
     let adx = bit63 19
     let smap = bit63 20
+    let avx512ifma = bit63 21
     let rdpid = bit63 22
     let clflushopt = bit63 23
     let clwb = bit63 24
+    let avx512pf = bit63 26
+    let avx512er = bit63 27
+    let avx512cd = bit63 28
     let sha = bit63 29
+    let avx512bw = bit63 30
+    let avx512vl = bit63 31
 
     include Flags.Make (struct
         let allow_intersecting = false
@@ -240,25 +247,38 @@ module Extended_feature_flags_subleaf_0 = struct
           ; avx2, "avx2"
           ; smep, "smep"
           ; bmi2, "bmi2"
+          ; avx512f, "avx512f"
+          ; avx512dq, "avx512dq"
           ; rdseed, "rdseed"
           ; adx, "adx"
           ; smap, "smap"
+          ; avx512ifma, "avx512ifma"
           ; rdpid, "rdpid"
           ; clflushopt, "clflushopt"
           ; clwb, "clwb"
+          ; avx512pf, "avx512pf"
+          ; avx512er, "avx512er"
+          ; avx512cd, "avx512cd"
           ; sha, "sha"
+          ; avx512bw, "avx512bw"
+          ; avx512vl, "avx512vl"
           ]
         ;;
       end)
   end
 
   module Ecx_flags = struct
+    let avx512vbmi = bit63 1
     let umip = bit63 2
     let pku = bit63 3
     let ospke = bit63 4
+    let avx512vmbi2 = bit63 6
     let cet_ss = bit63 7
     let vaes = bit63 9
     let vpcmulqdq = bit63 10
+    let avx512vnni = bit63 11
+    let avx512bitalg = bit63 12
+    let avx512vpopcntdq = bit63 14
 
     include Flags.Make (struct
         let allow_intersecting = false
@@ -266,12 +286,36 @@ module Extended_feature_flags_subleaf_0 = struct
         let remove_zero_flags = false
 
         let known =
-          [ umip, "umip"
+          [ avx512vbmi, "avx512vbmi"
+          ; umip, "umip"
           ; pku, "pku"
           ; ospke, "ospke"
+          ; avx512vmbi2, "avx512vmbi2"
           ; cet_ss, "cet_ss"
           ; vaes, "vaes"
           ; vpcmulqdq, "vpcmulqdq"
+          ; avx512vnni, "avx512vnni"
+          ; avx512bitalg, "avx512bitalg"
+          ; avx512vpopcntdq, "avx512vpopcntdq"
+          ]
+        ;;
+      end)
+  end
+
+  module Edx_flags = struct
+    let avx5124vnniw = bit63 2
+    let avx5124fmaps = bit63 3
+    let avx512_vp2intersect = bit63 8
+
+    include Flags.Make (struct
+        let allow_intersecting = false
+        let should_print_error = true
+        let remove_zero_flags = false
+
+        let known =
+          [ avx5124vnniw, "avx5124vnniw"
+          ; avx5124fmaps, "avx5124fmaps"
+          ; avx512_vp2intersect, "avx512_vp2intersect"
           ]
         ;;
       end)
@@ -281,6 +325,7 @@ module Extended_feature_flags_subleaf_0 = struct
     { max_subleaf : int
     ; ebx : Ebx_flags.t
     ; ecx : Ecx_flags.t
+    ; edx : Edx_flags.t
     }
   [@@deriving sexp_of]
 
@@ -289,7 +334,7 @@ module Extended_feature_flags_subleaf_0 = struct
       { mutable ignored : int
       ; mutable ebx : Ebx_flags.t
       ; mutable ecx : Ecx_flags.t
-      ; mutable edx : int
+      ; mutable edx : Edx_flags.t
       }
   end
 
@@ -297,15 +342,23 @@ module Extended_feature_flags_subleaf_0 = struct
 
   let retrieve () =
     let raw_arg =
-      { ignored = 0; Raw_arg.ebx = Ebx_flags.empty; ecx = Ecx_flags.empty; edx = 0 }
+      { ignored = 0
+      ; Raw_arg.ebx = Ebx_flags.empty
+      ; ecx = Ecx_flags.empty
+      ; edx = Edx_flags.empty
+      }
     in
     let max_subleaf = _get raw_arg in
-    { max_subleaf; ebx = raw_arg.ebx; ecx = raw_arg.ecx }
+    { max_subleaf; ebx = raw_arg.ebx; ecx = raw_arg.ecx; edx = raw_arg.edx }
   ;;
 
   module For_testing = struct
-    let build_from_ints ~eax ~ebx ~ecx =
-      { max_subleaf = eax; ebx = Ebx_flags.of_int ebx; ecx = Ecx_flags.of_int ecx }
+    let build_from_ints ~eax ~ebx ~ecx ~edx =
+      { max_subleaf = eax
+      ; ebx = Ebx_flags.of_int ebx
+      ; ecx = Ecx_flags.of_int ecx
+      ; edx = Edx_flags.of_int edx
+      }
     ;;
   end
 end

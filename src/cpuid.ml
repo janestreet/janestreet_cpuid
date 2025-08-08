@@ -107,6 +107,150 @@ let supports_avx2 = function
     (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx2
 ;;
 
+let supports_avx512f = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512f
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512f
+;;
+
+let supports_avx512dq = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512dq
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512dq
+;;
+
+let supports_avx512ifma = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512ifma
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512ifma
+;;
+
+let supports_avx512pf = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512pf
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512pf
+;;
+
+let supports_avx512er = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512er
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512er
+;;
+
+let supports_avx512cd = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512cd
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512cd
+;;
+
+let supports_avx512bw = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512bw
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512bw
+;;
+
+let supports_avx512vl = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512vl
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512vl
+;;
+
+let supports_avx512vbmi = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vbmi
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vbmi
+;;
+
+let supports_avx512vbmi2 = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vmbi2
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vmbi2
+;;
+
+let supports_avx512vnni = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vnni
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vnni
+;;
+
+let supports_avx512bitalg = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512bitalg
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512bitalg
+;;
+
+let supports_avx512vpopcntdq = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vpopcntdq
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vpopcntdq
+;;
+
+let supports_avx5124vnniw = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).edx |> Edx_flags.do_intersect Edx_flags.avx5124vnniw
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).edx |> Edx_flags.do_intersect Edx_flags.avx5124vnniw
+;;
+
+let supports_avx5124fmaps = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).edx |> Edx_flags.do_intersect Edx_flags.avx5124fmaps
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).edx |> Edx_flags.do_intersect Edx_flags.avx5124fmaps
+;;
+
+let supports_avx512_vp2intersect = function
+  | Amd _ ->
+    let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).edx |> Edx_flags.do_intersect Edx_flags.avx512_vp2intersect
+  | Intel _ ->
+    let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
+    (retrieve ()).edx |> Edx_flags.do_intersect Edx_flags.avx512_vp2intersect
+;;
+
 let supports_fma = function
   | Amd _ ->
     let open Amd_cpuid.Version_and_feature_information in
