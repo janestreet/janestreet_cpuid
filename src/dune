@@ -9,4 +9,6 @@
  (libraries core core_kernel.flags)
  (public_name janestreet_cpuid)
  (preprocess
-  (pps ppx_jane)))
+  (pps ppx_jane))
+ (wasm_of_ocaml
+  (javascript_files cpuid.js)))
