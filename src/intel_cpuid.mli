@@ -26,7 +26,7 @@ module Version_and_feature_information : sig
 
   (** This is the only field in the CPUID which changes when called multiple times. The
       [initial_apic_id] field changes based on which core the process is currently running
-      on. **)
+      on. *)
   module Ebx : sig
     type t =
       { mutable brand_index : int
