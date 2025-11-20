@@ -7,6 +7,7 @@ open Core
 type t =
   | Amd of Amd_cpuid.t
   | Intel of Intel_cpuid.t
+  | Arm
 
 val create : unit -> t Or_error.t
 val canonical_identifier : t -> string
