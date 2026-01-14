@@ -1,11 +1,11 @@
 (** All of the information in this file comes from (currently) page 1779 of the AMD
     Architecture Programmer's Manual, Volumes 1-5. Specifically, Volume 3: Appendix E
-    detailing the CPUID instruction. **)
+    detailing the CPUID instruction. *)
 
 include Cpuid_intf.S
 
 (** On AMD CPUs the leaf retrieved when EAX is set to 0x1 contains processor model
-    information as well as some basic features about the processor. **)
+    information as well as some basic features about the processor. *)
 module Version_and_feature_information : sig
   module Eax : sig
     type t =
@@ -20,7 +20,7 @@ module Version_and_feature_information : sig
 
   (** This is the only field in the CPUID which changes when called multiple times. The
       [initial_apic_id] field changes based on which core the process is currently running
-      on. **)
+      on. *)
   module Ebx : sig
     type t =
       { mutable brand_index : int
@@ -98,7 +98,7 @@ end
 (** Canonical identifier similar to the one we use on Intel CPUs to index into a list of
     supported performance counters.
 
-    See [Intel_cpuid.canonical_identifier] for a description of that. **)
+    See [Intel_cpuid.canonical_identifier] for a description of that. *)
 val canonical_identifier : t -> string
 
 (** The leaf at 0x7 is special because in addition to putting 0x7 it also lets you put a
@@ -107,7 +107,7 @@ val canonical_identifier : t -> string
 
     This provides flags into more modern features on AMD CPUs, including some which most
     of our machines definitely do not have. If you use any of these features, check to
-    make sure they're supported. **)
+    make sure they're supported. *)
 module Extended_feature_flags_subleaf_0 : sig
   module Ebx_flags : sig
     include Flags.S

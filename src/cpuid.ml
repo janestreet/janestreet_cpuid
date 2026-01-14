@@ -9,6 +9,7 @@ module Intel = Intel_cpuid
 type t =
   | Amd of Amd_cpuid.t
   | Intel of Intel_cpuid.t
+  | Arm
 
 module Maximum_value_and_brand = struct
   type t =
@@ -45,15 +46,18 @@ let create () : t Or_error.t =
          ; brand = value.brand
          }
        |> Amd)
+  | "arm" -> Ok Arm
   | _ -> Or_error.error_string "Running on an unknown architecture"
 ;;
 
 let canonical_identifier = function
+  | Arm -> "arm (unknown)"
   | Amd t -> Amd_cpuid.canonical_identifier t
   | Intel t -> Intel_cpuid.canonical_identifier t
 ;;
 
 let supports_sse3 = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Version_and_feature_information in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.sse3
@@ -63,6 +67,7 @@ let supports_sse3 = function
 ;;
 
 let supports_sse4_1 = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Version_and_feature_information in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.sse4_1
@@ -72,6 +77,7 @@ let supports_sse4_1 = function
 ;;
 
 let supports_sse4_2 = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Version_and_feature_information in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.sse4_2
@@ -81,6 +87,7 @@ let supports_sse4_2 = function
 ;;
 
 let supports_avx = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Version_and_feature_information in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx
@@ -90,6 +97,7 @@ let supports_avx = function
 ;;
 
 let supports_pclmulqdq = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Version_and_feature_information in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.pclmulqdq
@@ -99,6 +107,7 @@ let supports_pclmulqdq = function
 ;;
 
 let supports_avx2 = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx2
@@ -108,6 +117,7 @@ let supports_avx2 = function
 ;;
 
 let supports_avx512f = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512f
@@ -117,6 +127,7 @@ let supports_avx512f = function
 ;;
 
 let supports_avx512dq = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512dq
@@ -126,6 +137,7 @@ let supports_avx512dq = function
 ;;
 
 let supports_avx512ifma = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512ifma
@@ -135,6 +147,7 @@ let supports_avx512ifma = function
 ;;
 
 let supports_avx512pf = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512pf
@@ -144,6 +157,7 @@ let supports_avx512pf = function
 ;;
 
 let supports_avx512er = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512er
@@ -153,6 +167,7 @@ let supports_avx512er = function
 ;;
 
 let supports_avx512cd = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512cd
@@ -162,6 +177,7 @@ let supports_avx512cd = function
 ;;
 
 let supports_avx512bw = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512bw
@@ -171,6 +187,7 @@ let supports_avx512bw = function
 ;;
 
 let supports_avx512vl = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ebx |> Ebx_flags.do_intersect Ebx_flags.avx512vl
@@ -180,6 +197,7 @@ let supports_avx512vl = function
 ;;
 
 let supports_avx512vbmi = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vbmi
@@ -189,6 +207,7 @@ let supports_avx512vbmi = function
 ;;
 
 let supports_avx512vbmi2 = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vmbi2
@@ -198,6 +217,7 @@ let supports_avx512vbmi2 = function
 ;;
 
 let supports_avx512vnni = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vnni
@@ -207,6 +227,7 @@ let supports_avx512vnni = function
 ;;
 
 let supports_avx512bitalg = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512bitalg
@@ -216,6 +237,7 @@ let supports_avx512bitalg = function
 ;;
 
 let supports_avx512vpopcntdq = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.avx512vpopcntdq
@@ -225,6 +247,7 @@ let supports_avx512vpopcntdq = function
 ;;
 
 let supports_avx5124vnniw = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).edx |> Edx_flags.do_intersect Edx_flags.avx5124vnniw
@@ -234,6 +257,7 @@ let supports_avx5124vnniw = function
 ;;
 
 let supports_avx5124fmaps = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).edx |> Edx_flags.do_intersect Edx_flags.avx5124fmaps
@@ -243,6 +267,7 @@ let supports_avx5124fmaps = function
 ;;
 
 let supports_avx512_vp2intersect = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Extended_feature_flags_subleaf_0 in
     (retrieve ()).edx |> Edx_flags.do_intersect Edx_flags.avx512_vp2intersect
@@ -252,6 +277,7 @@ let supports_avx512_vp2intersect = function
 ;;
 
 let supports_fma = function
+  | Arm -> false
   | Amd _ ->
     let open Amd_cpuid.Version_and_feature_information in
     (retrieve ()).ecx |> Ecx_flags.do_intersect Ecx_flags.fma
@@ -261,6 +287,7 @@ let supports_fma = function
 ;;
 
 let supports_waitpkg = function
+  | Arm -> false
   | Amd _ -> false
   | Intel _ ->
     let open Intel_cpuid.Extended_feature_flags_subleaf_0 in
@@ -268,6 +295,7 @@ let supports_waitpkg = function
 ;;
 
 let supports_rtm = function
+  | Arm -> false
   | Amd _ -> false
   | Intel _ ->
     let open Intel_cpuid.Extended_feature_flags_subleaf_0 in

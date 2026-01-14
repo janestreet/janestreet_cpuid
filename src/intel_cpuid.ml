@@ -157,7 +157,7 @@ module Version_and_feature_information = struct
     let htt = bit63 28
     let tm = bit63 29
 
-    (*  let reserved3 = bit63 30 *)
+    (* let reserved3 = bit63 30 *)
     let pbe = bit63 31
 
     include Flags.Make (struct

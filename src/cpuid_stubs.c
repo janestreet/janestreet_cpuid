@@ -1,5 +1,36 @@
 #include "ocaml_utils.h"
 #include <caml/mlvalues.h>
+#include <caml/memory.h>
+#include <caml/alloc.h>
+
+#ifdef __aarch64__
+
+#include <caml/fail.h>
+
+CAMLprim value cpuid_arbitrary_leaf_and_subleaf(void) { return Val_unit; }
+
+CAMLprim value cpuid_maximum_value_and_brand(value v_record) {
+  CAMLparam1(v_record);
+  CAMLlocal1(v_brand_string);
+  v_brand_string = caml_copy_string("arm");
+  Store_field(v_record, 1, v_brand_string);
+  CAMLreturn(Val_unit);
+}
+
+CAMLprim value amd_cpuid_version_and_feature_information(void) {
+  caml_invalid_argument("unavailable on arm");
+}
+
+CAMLprim value intel_cpuid_version_and_feature_information(void) {
+  caml_invalid_argument("unavailable on arm");
+}
+
+CAMLprim value cpuid_extended_feature_flags_subleaf0(void) {
+  caml_invalid_argument("unavailable on arm");
+}
+
+#else
+
 #include <cpuid.h>
 #include <string.h>
 
@@ -176,3 +207,5 @@ CAMLprim value cpuid_extended_feature_flags_subleaf0(value v_record) {
 
   CAMLreturn(Val_int(eax));
 }
+
+#endif
