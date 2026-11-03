@@ -321,5 +321,5 @@ end
 external arbitrary_leaf_and_subleaf
   :  leaf:int
   -> subleaf:int
-  -> local_ Registers.t
+  -> Registers.t @ local
   = "cpuid_arbitrary_leaf_and_subleaf"
